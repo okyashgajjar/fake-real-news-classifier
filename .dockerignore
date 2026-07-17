@@ -1,0 +1,8 @@
+Fake-Real-News-Detector/
+frontend/
+.mycli-fts/
+frontend/node_modules/
+frontend/dist/
+.git/
+ml_pipelines/datasets/
+ml_pipelines/*.ipynb

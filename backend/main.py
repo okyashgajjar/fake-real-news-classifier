@@ -49,18 +49,20 @@ async def startup():
 
 @app.post("/api/signup", response_model=LoginResponse)
 async def signup(req: SignupRequest):
-    if get_user_by_email(req.email):
+    normalized_email = req.email.strip().lower()
+    if get_user_by_email(normalized_email):
         raise HTTPException(status_code=400, detail="Email already registered")
     password_hash = bcrypt.hashpw(req.password.encode(), bcrypt.gensalt()).decode()
-    create_user(req.email, req.username, password_hash)
-    user = get_user_by_email(req.email)
+    create_user(normalized_email, req.username.strip(), password_hash)
+    user = get_user_by_email(normalized_email)
     token = jwt.encode({"user_id": user["id"], "email": user["email"], "username": user["username"]}, SECRET_KEY, algorithm=ALGORITHM)
     return LoginResponse(token=token, username=user["username"], user_id=user["id"])
 
 
 @app.post("/api/login", response_model=LoginResponse)
 async def login(req: LoginRequest):
-    user = get_user_by_email(req.email)
+    normalized_email = req.email.strip().lower()
+    user = get_user_by_email(normalized_email)
     if not user or not bcrypt.checkpw(req.password.encode(), user["password_hash"].encode()):
         raise HTTPException(status_code=401, detail="Invalid email or password")
     token = jwt.encode({"user_id": user["id"], "email": user["email"], "username": user["username"]}, SECRET_KEY, algorithm=ALGORITHM)

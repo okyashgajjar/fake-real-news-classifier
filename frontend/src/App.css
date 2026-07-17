@@ -1659,3 +1659,133 @@ a { color: inherit; text-decoration: none; }
   background: rgba(201, 100, 66, 0.15);
   color: var(--text-primary);
 }
+
+/* ===== MOBILE RESPONSIVENESS OVERRIDES ===== */
+@media (max-width: 768px) {
+  /* Navbar responsiveness using display: contents to dissolve navbar-left wrapper */
+  .navbar-inner {
+    display: grid;
+    grid-template-areas: 
+      "brand actions"
+      "links links";
+    grid-template-columns: 1fr auto;
+    gap: 16px;
+    padding: 14px 20px;
+  }
+  
+  .navbar-left {
+    display: contents;
+  }
+  
+  .navbar-brand {
+    grid-area: brand;
+    justify-self: start;
+    align-self: center;
+    font-size: 17px;
+  }
+  
+  .navbar-actions {
+    grid-area: actions;
+    justify-self: end;
+    align-self: center;
+    gap: 8px;
+  }
+
+  .user-badge {
+    padding: 4px 10px 4px 4px;
+    font-size: 12px;
+  }
+
+  .user-avatar {
+    width: 22px;
+    height: 22px;
+  }
+
+  .btn-nav {
+    padding: 5px 12px;
+    font-size: 12px;
+  }
+  
+  .navbar-links {
+    grid-area: links;
+    justify-content: center;
+    width: 100%;
+    border-top: 1px solid var(--glass-border);
+    padding-top: 12px;
+    gap: 4px;
+  }
+  
+  .navbar-links a {
+    flex: 1;
+    text-align: center;
+    padding: 6px 4px;
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Stack the user-badge and logout button if they overflow */
+  .navbar-actions {
+    gap: 6px;
+  }
+  
+  /* Textarea actions stacking */
+  .predict-actions {
+    flex-direction: column;
+    gap: 12px;
+    align-items: stretch;
+  }
+  
+  .char-count {
+    text-align: center;
+  }
+  
+  .btn-detect {
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* File upload dropzone adjustments */
+  .upload-dropzone {
+    min-height: 280px;
+    padding: 20px;
+  }
+  
+  .upload-dropzone h3 {
+    font-size: 16px;
+  }
+
+  .upload-dropzone p {
+    font-size: 13px;
+  }
+
+  /* Page title padding adjustments */
+  .predict-page {
+    padding-top: 40px;
+  }
+
+  .predict-header h1, .dashboard-header h1, .headline-xl {
+    font-size: 28px;
+  }
+
+  /* Stat cards spacing */
+  .metrics-grid, .admin-stats {
+    gap: 12px;
+  }
+
+  .metric-card, .admin-stat-card {
+    padding: 16px;
+  }
+
+  .metric-value, .admin-stat-value {
+    font-size: 24px;
+  }
+  
+  /* Landing page tweaks */
+  .hero h1 {
+    font-size: 32px;
+  }
+  .hero p {
+    font-size: 15px;
+  }
+}

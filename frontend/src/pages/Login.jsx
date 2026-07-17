@@ -36,9 +36,13 @@ export default function Login({ onLogin }) {
     <div className="auth-page">
       <main className="auth-main">
         <div className="auth-card">
-          <div className="auth-logo">
+          <Link to="/" className="auth-back-link">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ marginRight: 6, verticalAlign: 'middle' }}><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+            Back to Home
+          </Link>
+          <Link to="/" className="auth-logo" style={{ display: 'flex', textDecoration: 'none' }}>
             <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/><path d="M18 14h-8"/><path d="M15 18h-5"/><path d="M10 6h8v4h-8V6Z"/></svg>
-          </div>
+          </Link>
           <h1>Welcome Back</h1>
           <p>Verify the truth. Sign in to access your dashboard.</p>
 

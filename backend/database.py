@@ -7,15 +7,20 @@ load_dotenv()
 TURSO_URL = os.getenv("TURSO_DATABASE_URL", "file:local.db")
 TURSO_TOKEN = os.getenv("TURSO_AUTH_TOKEN", "")
 
+# Normalize Turso URL: libsql-experimental requires https:// for direct remote connections
+if TURSO_URL.startswith("libsql://"):
+    TURSO_URL = TURSO_URL.replace("libsql://", "https://")
+
 _conn = None
 
 def get_connection():
     global _conn
     if _conn is None:
         if TURSO_TOKEN:
-            # Connect directly to the remote Turso cloud database
+            print(f"Connecting directly to Turso cloud database: {TURSO_URL}")
             _conn = libsql.connect(database=TURSO_URL, auth_token=TURSO_TOKEN)
         else:
+            print("WARNING: TURSO_AUTH_TOKEN is not set. Falling back to local SQLite database (local.db). DATA WILL NOT PERSIST!")
             _conn = libsql.connect("local.db")
     return _conn
 

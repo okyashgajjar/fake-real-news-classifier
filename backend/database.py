@@ -13,16 +13,15 @@ def get_connection():
     global _conn
     if _conn is None:
         if TURSO_TOKEN:
-            _conn = libsql.connect("fake-news.db", sync_url=TURSO_URL, auth_token=TURSO_TOKEN)
-            _conn.sync()
+            # Connect directly to the remote Turso cloud database
+            _conn = libsql.connect(database=TURSO_URL, auth_token=TURSO_TOKEN)
         else:
             _conn = libsql.connect("local.db")
     return _conn
 
 def sync_db():
-    global _conn
-    if _conn and TURSO_TOKEN:
-        _conn.sync()
+    # Direct remote connections do not require syncing
+    pass
 
 def init_db():
     conn = get_connection()
